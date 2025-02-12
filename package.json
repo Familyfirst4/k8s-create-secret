@@ -1,10 +1,11 @@
 {
    "name": "k8s-create-secret-action",
-   "version": "2.0.0",
+   "version": "5.0.0",
    "private": true,
    "main": "lib/index.js",
    "scripts": {
-      "build": "ncc build src/run.ts -o lib",
+      "prebuild": "npm i @vercel/ncc",
+      "build": "ncc build src/index.ts -o lib",
       "test": "jest",
       "format": "prettier --write .",
       "format-check": "prettier --check ."
@@ -17,18 +18,20 @@
    "author": "GitHub",
    "license": "MIT",
    "dependencies": {
-      "@actions/core": "^1.2.6",
+      "@actions/core": "^1.11.1",
       "@actions/exec": "^1.0.0",
-      "@actions/tool-cache": "^1.0.0",
-      "@kubernetes/client-node": "^0.15.1"
+      "@actions/tool-cache": "^2.0.2",
+      "@babel/core": "^7.26.8",
+      "@babel/preset-env": "^7.26.8",
+      "@kubernetes/client-node": "^1.0.0"
    },
    "devDependencies": {
-      "@types/jest": "^26.0.0",
-      "@types/node": "^12.0.4",
-      "@vercel/ncc": "^0.33.1",
-      "jest": "^26.0.1",
-      "prettier": "2.7.1",
-      "ts-jest": "^26.0.0",
-      "typescript": "^3.9.2"
+      "@types/jest": "^29.5.14",
+      "@types/node": "^22.13.1",
+      "@vercel/ncc": "^0.38.3",
+      "jest": "^29.7.0",
+      "prettier": "^3.5.0",
+      "ts-jest": "^29.2.5",
+      "typescript": "^5.7.3"
    }
 }

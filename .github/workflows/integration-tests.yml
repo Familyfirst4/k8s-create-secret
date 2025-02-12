@@ -5,19 +5,22 @@ on:
 jobs:
    aks-minikube-integration-tests:
       name: Generic Secret Validation
-      runs-on: ubuntu-latest
+      runs-on: ubuntu-22.04
       env:
          KUBECONFIG: /home/runner/.kube/config
          PR_BASE_REF: ${{ github.event.pull_request.base.ref }}
       steps:
+         - name: Install conntrack
+           run: sudo apt-get install -y conntrack
          - id: setup-minikube
            name: Setup Minikube
-           uses: manusa/actions-setup-minikube@v2.4.2
+           uses: medyagh/setup-minikube@9713609d49ea747ed60e3ec4438f8c4ba2cad675
            with:
-              minikube version: 'v1.24.0'
-              kubernetes version: 'v1.17.8'
+              minikube-version: 1.24.0
+              kubernetes-version: 1.22.3
               driver: 'none'
-         - uses: actions/checkout@v1
+           timeout-minutes: 3
+         - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
          - id: action-npm-build
            name: npm install and build
            run: |
@@ -51,14 +54,17 @@ jobs:
          KUBECONFIG: /home/runner/.kube/config
          PR_BASE_REF: ${{ github.event.pull_request.base.ref }}
       steps:
+         - name: Install conntrack
+           run: sudo apt-get install -y conntrack
          - id: setup-minikube
            name: Setup Minikube
-           uses: manusa/actions-setup-minikube@v2.4.2
+           uses: medyagh/setup-minikube@latest
            with:
-              minikube version: 'v1.24.0'
-              kubernetes version: 'v1.17.8'
+              minikube-version: 1.24.0
+              kubernetes-version: 1.22.3
               driver: 'none'
-         - uses: actions/checkout@v1
+           timeout-minutes: 3
+         - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
          - id: action-npm-build
            name: npm install and build
            run: |
